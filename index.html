@@ -1,19 +1,36 @@
 <!DOCTYPE html >
-<html lang="en" >
+<html lang="en" ng-app="minmax">
 <head >
 	<title >Data Binding</title >
 	<link href="../libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" >
 	<link href="main.css" rel="stylesheet" >
 </head>
 
-<body ng-app>
+<body>
 
-<div class="container" ng-init="title='CodeCraft';awesome=true;">
-	<h1>{{ title }}  is Awesome: {{awesome}} </h1>
-	<input type="text" class="form-control" ng-model="title" />
-	<input type="checkbox" class="form-control" ng-model="awesome" />
-</div >
+<div class="container main-content" ng-controller="MinMaxCtrl">
+	<form>
+		<div class="form-group">
+			<label for="name">Name</label>
+			<input type="text" id="name" class="form-control" ng-model="formModel.name">
+		</div>
+		<div class="form-group">
+			<label for="email">E-mail</label>
+			<input type="email" id="email" class="form-control" ng-model="formModel.email">
+		</div>
+		<div class="form-group">
+			<label for="password">Password</label>
+			<input type="password" id="´password" class="form-control" ng-model="formModel.password">
+		</div>
+		<div class="form-group">
+			<button class="btn btn-primary" ng-click="onSubmit()">Register</button>
+		</div>
+	</form>
+	<pre>{{ formModel | json }}</pre>
+
+</div>
 
 <script src="../libs/angular/angular.min.js" ></script >
+<script src="main.js" ></script >
 </body >
 </html >
