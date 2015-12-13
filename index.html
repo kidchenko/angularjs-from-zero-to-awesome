@@ -9,28 +9,70 @@
 <body>
 
 <div class="container main-content" ng-controller="MinMaxCtrl">
-	<form ng-submit="onSubmit()">
-		<div class="form-group">
-			<label for="name">Name</label>
-			<input type="text" id="name" class="form-control" ng-model="formModel.name">
-		</div>
+	<form ng-submit="onSubmit()"
+				novalidate="novalidate"
+				name="theForm">
+
 		<div class="form-group">
 			<label for="email">E-mail</label>
-			<input type="email" id="email" class="form-control" ng-model="formModel.email" required>
+			<input type="email"
+						 id="email"
+						 class="form-control"
+						 ng-model="formModel.email"
+						 name="email"
+						 required>
+		  <pre>Field validation? {{theForm.email.$error | json}}</pre>
+	 		<pre>Field valid? {{theForm.email.$valid}}</pre>
+			<pre>Field pristined? {{theForm.email.$pristine}}</pre>
+			<pre>Form submitted? {{theForm.$submitted}}</pre>
 		</div>
+
+
+		<div class="form-group">
+			<label for="username">Username</label>
+			<input type="text"
+						 id="username"
+						 class="form-control"
+						 ng-model="formModel.name"
+						 ng-pattern="/^[A-Za-z0-9_]{1,15}$/"
+						 ng-minlength="3"
+						 ng-pattern-err-type="badUsername"
+						 required>
+		</div>
+
+		<div class="form-group">
+			<label for="age">Age</label>
+			<input type="number"
+						 id="age"
+						 class="form-control"
+						 ng-model="formModel.age"
+						 min="18"
+						 max="99"
+						 ng-min-err-type="tooYoung"
+						 ng-max-err-type="tooOld"
+						 required
+						 >
+		</div>
+
 		<div class="form-group">
 			<label for="password">Password</label>
-			<input type="password" id="´password" class="form-control" ng-model="formModel.password">
+			<input type="password"
+						 id="´password"
+						 class="form-control"
+						 ng-model="formModel.password"
+						 required>
 		</div>
+
 		<div class="form-group">
 			<button class="btn btn-primary">Register</button>
 		</div>
-	</form>
-	<pre>{{ formModel | json }}</pre>
 
+	</form>
+	<pre>{{ theForm | json }}</pre>
 </div>
 
 <script src="../libs/angular/angular.min.js" ></script >
+<script src="../libs/angular-auto-validate/dist/jcs-auto-validate.min.js" ></script >
 <script src="main.js" ></script >
 </body >
 </html >
